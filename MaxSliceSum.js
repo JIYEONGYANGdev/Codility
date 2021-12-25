@@ -25,6 +25,41 @@ the result will be an integer within the range [−2,147,483,648..2,147,483,647]
 
 */
 
+/* 
+second - reference
+function solution(A) {
+  // 음수를 고려해야 함 -> 0을 상정해두고 reduce로 합을 구하되, 부분 합이 음수가 나오면 max = 0 return, 
+  // 합이 0보다 큰 양수라면
+  // 모두 음수면 sum은 0으로 할당될테니 본 함수에서 max가 0 이면 가장 큰 음수 1개의 값만 리턴(음수는 더할수록 작아지니)
+
+  // global vs local 전체 합 계산해두고 부분 합과 비교하며 바로 업데이트
+
+  // 완전 탐색 - O(N)
+
+  let max = 0;
+
+  const sum = A.reduce((prevSum, curr) => {
+    // 현재 값을 더한 값을 기준으로,
+    let currSum = prevSum + curr;
+
+    if(currSum < 0) return 0; // 음수합이 되었으니 0으로 상정
+
+    if(currSum < max) return currSum;
+
+    return max = currSum; // max 에 할당하면서 max 값 return
+
+  },0)
+
+  return max === 0 ? Math.max(...A) : max;
+}
+
+* passed by 100% score
+// 완전탐색이려면 reduce로 한 번? 순회할 수 있도록 해보기.
+
+*/
+
+/* first try
+
 function solution(A) {
   // 우선 전체 합?
   const totalSum = A.reduce((a,c) => a+c);
@@ -62,8 +97,7 @@ function solution(A) {
 
 };
 
-/*
-test result
+// test result
 
 one_element✘RUNTIME ERROR
 tested program terminated with exit code 1
