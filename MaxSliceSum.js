@@ -25,7 +25,6 @@ the result will be an integer within the range [−2,147,483,648..2,147,483,647]
 
 */
 
-/* 
 second - reference
 function solution(A) {
   // 음수를 고려해야 함 -> 0을 상정해두고 reduce로 합을 구하되, 부분 합이 음수가 나오면 max = 0 return, 
@@ -53,10 +52,8 @@ function solution(A) {
   return max === 0 ? Math.max(...A) : max;
 }
 
-* passed by 100% score
-// 완전탐색이려면 reduce로 한 번? 순회할 수 있도록 해보기.
-
-*/
+// * passed by 100% score
+// * 완전탐색이려면 reduce로 한 번? 순회할 수 있도록 해보기.
 
 /* first try
 
