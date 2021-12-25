@@ -25,6 +25,7 @@ the result will be an integer within the range [−2,147,483,648..2,147,483,647]
 
 */
 
+/*
 second - reference
 function solution(A) {
   // 음수를 고려해야 함 -> 0을 상정해두고 reduce로 합을 구하되, 부분 합이 음수가 나오면 max = 0 return, 
@@ -54,6 +55,34 @@ function solution(A) {
 
 // * passed by 100% score
 // * 완전탐색이려면 reduce로 한 번? 순회할 수 있도록 해보기.
+*/
+
+// third - reference
+function solution(A) {
+    // 전체 합, 부분 합 global vs local
+    // 전체 합과 부분합을 A[0] 요소 한개로 시작
+
+    // 완전탐색 - 요소를 차례대로 순회하면서 부분 합을 구함과 동시에 전체 합과 비교해서 
+    // max값을 업데이트
+    // reduce와 거의 같은 풀이
+
+    // 만약 요소가 1개인 배열이면, 그 자체가 max값
+    if(A.length === 1) return A[0];
+
+    let globalMaxSum = A[0];
+    let localMaxSum = A[0];
+
+    // 0번째 값을 상정해두었으므로 index 1부터 시작,
+    for(let i = 1; i < A.length; i++) {
+        // localMaxSum += A[i]; // 현재 요소 값을 더했을 때, localMaxSum이 감소한다면 현재 값이 음수라는 얘기이므로
+        // localMaxSum = Math.max(localMaxSum+A[i], localMaxSum)
+        localMaxSum = Math.max(localMaxSum + A[i], A[i]); // 현재 값을 더한 값과 현재 요소 값을 비교해서 부분 합을 업데이트
+
+        globalMaxSum = Math.max(globalMaxSum, localMaxSum); // 전체 합 max는, 부분 합이 더 크다면 업데이트.
+    }
+
+    return globalMaxSum;
+}
 
 /* first try
 
